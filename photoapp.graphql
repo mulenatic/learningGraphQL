@@ -29,7 +29,7 @@ type Photo {
 
 type Query {
   totalPhotos: Int!
-  allPhotos: [Photo!]!
+  allPhotos(category: PhotoCategory): [Photo!]!
   totalUsers: Int!
   allUsers: [User!]!
   User(githubLogin: ID!): User!
