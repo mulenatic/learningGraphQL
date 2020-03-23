@@ -8,6 +8,12 @@ enum PhotoCategory {
 
 scalar DateTime
 
+type User {
+  gitHubLogin: ID!
+  name: String
+  avatar: String
+}
+
 type Photo {
   id: ID!
   name: String!
@@ -15,4 +21,5 @@ type Photo {
   description: String
   created: DateTime
   categroy: PhotoCategory!
+  postedBy: User!
 }
