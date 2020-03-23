@@ -1,3 +1,11 @@
+enum PhotoCategory {
+  SELFIE
+  PORTRAIT
+  ACTION
+  LANDSCAPE
+  GRAPHIC
+}
+
 scalar DateTime
 
 type Photo {
@@ -6,4 +14,5 @@ type Photo {
   url: String!
   description: String
   created: DateTime
+  categroy: PhotoCategory!
 }
