@@ -20,6 +20,13 @@ enum PhotoCategory {
 
 scalar DateTime
 
+input PostPhotoInput {
+  name: String!
+  description: String
+  categroy: PhotoCategory = PORTRAIT
+}
+  
+
 type User {
   gitHubLogin: ID!
   name: String
@@ -59,9 +66,7 @@ type Query {
 
 type Mutation {
   postPhoto(
-    name: String!
-    description: String
-    categroy: PhotoCategory = PORTRAIT
+    input: PostPhotoInput!): Photo!
   ): Photo!
 }
 
