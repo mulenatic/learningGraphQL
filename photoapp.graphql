@@ -1,3 +1,15 @@
+enum SortDirection {
+  ASCENDING
+  DESCENDING
+}
+
+enum SortablePhotoField {
+  name
+  description
+  category
+  created
+}
+
 enum PhotoCategory {
   SELFIE
   PORTRAIT
@@ -12,7 +24,13 @@ type User {
   gitHubLogin: ID!
   name: String
   avatar: String
-  postedPhotos: [Photo!]!
+  postedPhotos(
+    first: Int = 25
+    start: Int = 0
+    sort: SortDirection = DESCENDING
+    sortBy: SortablePhotoField = created
+    category: PhotoCategory
+  ): [Photo!]!
   inPhotos: [Photo!]!
 }
 
@@ -29,7 +47,10 @@ type Photo {
 
 type Query {
   totalPhotos: Int!
-  allPhotos(first: Int=50 start: Int=0): [Photo!]!
+  allPhotos(
+    sort: SortDirection = DESCENDING
+    sortBy: SortablePhotoField = created
+  ): [Photo!]!
   totalUsers: Int!
   allUsers( first: Int=25 start: Int=0): [User!]!
   User(githubLogin: ID!): User!
