@@ -25,20 +25,43 @@ input PostPhotoInput {
   description: String
   categroy: PhotoCategory = PORTRAIT
 }
-  
+
+input PhotoFilter {
+  category: PhotoCategory
+  createdBetween: DateRange
+  taggedUsers: [ID!]
+  searchText: String
+}
+
+input DateRange {
+  start: DateTime!
+  end: DateTime!
+}
+
+input DataPage {
+  first: Int = 25
+  start: Int = 0
+}
+
+input DataSort {
+  sort: SortDirection = DESCENDING
+  sortBy: SortablePhotoField = created
+}
 
 type User {
   gitHubLogin: ID!
   name: String
   avatar: String
   postedPhotos(
-    first: Int = 25
-    start: Int = 0
-    sort: SortDirection = DESCENDING
-    sortBy: SortablePhotoField = created
-    category: PhotoCategory
+    filter: PhotoFilter
+    paging: DataPage
+    sorting: DataSort
   ): [Photo!]!
-  inPhotos: [Photo!]!
+  inPhotos(
+    filter: PhotoFilter
+    paging: DataPage
+    sorting: DataSort
+  ): [Photo!]!
 }
 
 type Photo {
@@ -49,17 +72,25 @@ type Photo {
   created: DateTime
   categroy: PhotoCategory!
   postedBy: User!
-  taggedUsers: [User!]!
+  taggedUsers(
+    filter: PhotoFilter
+    paging: DataPage
+    sorting: DataSort
+  ): [User!]!
 }
 
 type Query {
   totalPhotos: Int!
   allPhotos(
-    sort: SortDirection = DESCENDING
-    sortBy: SortablePhotoField = created
+    filter: PhotoFilter
+    paging: DataPage
+    sorting: DataSort
   ): [Photo!]!
   totalUsers: Int!
-  allUsers( first: Int=25 start: Int=0): [User!]!
+  allUsers(
+    paging: DataPage
+    sorting: DataSort
+  ): [User!]!
   User(githubLogin: ID!): User!
   Photo(id: ID!): Photo!
 }
@@ -67,7 +98,7 @@ type Query {
 type Mutation {
   postPhoto(
     input: PostPhotoInput!): Photo!
-  ): Photo!
+): Photo!
 }
 
 schema {
