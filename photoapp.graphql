@@ -114,7 +114,13 @@ type Query {
     paging: DataPage
     sorting: DataSort
   ): [User!]!
-  User(githubLogin: ID!): User!
+  """
+  All of the photos posted by this user
+  """
+  User(
+    "The unique code from GitHub that is sent to authorize the user"
+    githubLogin: ID!
+  ): User!
   Photo(id: ID!): Photo!
 }
 
