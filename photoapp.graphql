@@ -79,6 +79,11 @@ type Photo {
   ): [User!]!
 }
 
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
 type Query {
   totalPhotos: Int!
   allPhotos(
@@ -97,8 +102,9 @@ type Query {
 
 type Mutation {
   postPhoto(
-    input: PostPhotoInput!): Photo!
-): Photo!
+    input: PostPhotoInput!
+  ): Photo!
+  githubAuth(code: String!): AuthPayload!
 }
 
 schema {
