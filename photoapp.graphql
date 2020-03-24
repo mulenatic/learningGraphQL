@@ -48,15 +48,33 @@ input DataSort {
   sortBy: SortablePhotoField = created
 }
 
+"""
+A user who has been authorized by GitHub at least once
+"""
 type User {
+  """
+  A user who has been authorized by GitHub at least once
+  """
   gitHubLogin: ID!
+  """
+  A user who has been authorized by GitHub at least once
+  """
   name: String
+  """
+  A user who has been authorized by GitHub at least once
+  """
   avatar: String
+  """
+  All of the photos posted by this user
+  """
   postedPhotos(
     filter: PhotoFilter
     paging: DataPage
     sorting: DataSort
   ): [Photo!]!
+  """
+  All of the photos posted by this user
+  """
   inPhotos(
     filter: PhotoFilter
     paging: DataPage
