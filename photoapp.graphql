@@ -107,7 +107,13 @@ type Mutation {
   githubAuth(code: String!): AuthPayload!
 }
 
+type Subscription {
+  newPhoto(category: PhotoCategory): Photo!
+  newUser: User!
+}
+
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
