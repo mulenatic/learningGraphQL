@@ -20,10 +20,16 @@ enum PhotoCategory {
 
 scalar DateTime
 
+"""
+The inputs sent with the postPhoto Mutation
+"""
 input PostPhotoInput {
+  "The name of the new photo"
   name: String!
+  "(optional) A brief description of the photo"
   description: String
-  categroy: PhotoCategory = PORTRAIT
+  "(optional) The category that defines the photo"
+  category: PhotoCategory=PORTRAIT
 }
 
 input PhotoFilter {
@@ -125,7 +131,9 @@ type Query {
 }
 
 type Mutation {
+  
   postPhoto(
+    "input: The name, description, and category for a new photo"
     input: PostPhotoInput!
   ): Photo!
   githubAuth(code: String!): AuthPayload!
