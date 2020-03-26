@@ -20,12 +20,14 @@ async function start() {
 	{ useNewUrlParser: true }
     );
     const db = mongoClient.db();
+    console.log(`Successfully connected to MongoDB ${db.databaseName} on ${MONGO_DB}`);
 
-    console.log(`Successfully connected to MongoDB ${db.databaseName}`);
+    const context = { db };
 
     const apolloServer = new ApolloServer({
 	typeDefs,
-	resolvers
+	resolvers,
+	context
     });
 
     apolloServer.applyMiddleware({app});
