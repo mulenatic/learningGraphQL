@@ -1,5 +1,3 @@
-let { _id, photos } = require('./dataStore');
-
 module.exports = {
     postPhoto(parent, args) {
 

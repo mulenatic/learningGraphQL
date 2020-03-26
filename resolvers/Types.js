@@ -1,5 +1,4 @@
 const { GraphQLScalarType } = require('graphql');
-const { photos, users, tags } = require('./dataStore');
 
 module.exports = {
     Photo: {

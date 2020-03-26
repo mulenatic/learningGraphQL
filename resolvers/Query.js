@@ -1,5 +1,3 @@
-const { photos } = require('./dataStore');
-
 module.exports =  {
     totalPhotos: (parent, args, { db }) =>
 	db.collection('photos')
